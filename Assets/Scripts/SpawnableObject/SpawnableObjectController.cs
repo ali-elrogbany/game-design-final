@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnableObjectController : MonoBehaviour
+public abstract class SpawnableObjectController : MonoBehaviour
 {
     private float moveSpeed = 10f;
 
@@ -20,4 +20,6 @@ public class SpawnableObjectController : MonoBehaviour
     {
         moveSpeed = speed;
     }
+
+    public abstract void OnCollision();
 }

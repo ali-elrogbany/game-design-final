@@ -1074,6 +1074,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8362875798694229321, guid: 2a8edaed5c35f470ba769db3f747e59f,
         type: 3}
+      propertyPath: powerUps
+      value: 
+      objectReference: {fileID: 11400000, guid: 568f6ac7cde884541a3b4771aed1422c,
+        type: 2}
+    - target: {fileID: 8362875798694229321, guid: 2a8edaed5c35f470ba769db3f747e59f,
+        type: 3}
+      propertyPath: obstacles
+      value: 
+      objectReference: {fileID: 11400000, guid: a82d0329821384d8daa1111f0f2df1d9,
+        type: 2}
+    - target: {fileID: 8362875798694229321, guid: 2a8edaed5c35f470ba769db3f747e59f,
+        type: 3}
+      propertyPath: collectables
+      value: 
+      objectReference: {fileID: 11400000, guid: 768ef421ba63c42668904d8febd7749e,
+        type: 2}
+    - target: {fileID: 8362875798694229321, guid: 2a8edaed5c35f470ba769db3f747e59f,
+        type: 3}
       propertyPath: markers.Array.data[0]
       value: 
       objectReference: {fileID: 508046006}

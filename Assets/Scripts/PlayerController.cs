@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
     [Header("Player Settings")]
     [SerializeField] private float moveSpeed = 40f;
     [SerializeField] private float jumpForce = 10f;
@@ -21,12 +23,21 @@ public class PlayerController : MonoBehaviour
 
     [Header("Local Variables")]
     private Transform currentPosition;
+    private bool isInvisible;
+    private List<PowerUpType> activePowerUps = new List<PowerUpType>();
 
     [Header("References")]
     private Rigidbody rb;
 
     void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        
         rb = GetComponent<Rigidbody>();
     }
 
@@ -65,6 +76,50 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ActivatePowerUp(PowerUpType powerUpType)
+    {
+        activePowerUps.Add(powerUpType);
+        StartCoroutine(HandlePowerUp(powerUpType));
+    }
+
+    private IEnumerator HandlePowerUp(PowerUpType powerUpType)
+    {
+        ApplyPowerUpEffect(powerUpType);
+
+        yield return new WaitForSeconds(10f);
+
+        RemovePowerUpEffect(powerUpType);
+        activePowerUps.Remove(powerUpType);
+    }
+
+    private void ApplyPowerUpEffect(PowerUpType powerUpType)
+    {
+        switch (powerUpType)
+        {
+            case PowerUpType.DOUBLE_SCORE:
+                if (GameManager.instance)
+                {
+                    GameManager.instance.ActivateDoubleScore();
+                }
+                break;
+            case PowerUpType.INVISIBLE:
+                isInvisible = true;
+                break;
+        }
+    }
+
+    private void RemovePowerUpEffect(PowerUpType powerUpType)
+    {
+        switch (powerUpType)
+        {
+            case PowerUpType.DOUBLE_SCORE:
+                break;
+            case PowerUpType.INVISIBLE:
+                isInvisible = false;
+                break;
+        }
+    }
+
     private void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
@@ -88,12 +143,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Obstacle"))
+        SpawnableObjectController spawnableObjectController = other.GetComponent<SpawnableObjectController>();
+        if (spawnableObjectController && !isInvisible)
         {
-            if (GameManager.instance)
-            {
-                GameManager.instance.OnGameOver();
-            }
+            spawnableObjectController.OnCollision();
         }
     }
 }

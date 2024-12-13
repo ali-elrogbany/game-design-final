@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [Header("Local Variables")]
     private bool isGameActive = true;
     private float score = 0f;
+    private int activeDoubleScorePowerUps = 0;
 
     void Awake()
     {
@@ -49,5 +50,40 @@ public class GameManager : MonoBehaviour
     public int GetScore()
     {
         return Mathf.FloorToInt(score);
+    }
+
+    public void IncrementScore(float score)
+    {
+        if (score < 0)
+            return;
+        this.score += score;
+    }
+
+    public void ActivateDoubleScore()
+    {
+        activeDoubleScorePowerUps++;
+        UpdateScoreMultiplier();
+
+        StartCoroutine(HandleDoubleScore());
+    }
+
+    private IEnumerator HandleDoubleScore()
+    {
+        yield return new WaitForSeconds(10f);
+
+        activeDoubleScorePowerUps--;
+        UpdateScoreMultiplier();
+    }
+
+    private void UpdateScoreMultiplier()
+    {
+        if (activeDoubleScorePowerUps > 0)
+        {
+            scoreMultiplier = 2f * (scoreMultiplier / Mathf.Max(1, activeDoubleScorePowerUps));
+        }
+        else
+        {
+            scoreMultiplier = 1f;
+        }
     }
 }
