@@ -22,12 +22,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;
 
     [Header("Local Variables")]
+    private bool isGrounded;
     private Transform currentPosition;
     private bool isInvisible;
     private List<PowerUpType> activePowerUps = new List<PowerUpType>();
 
     [Header("References")]
     private Rigidbody rb;
+    private Animator animator;
 
     void Awake()
     {
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
         instance = this;
         
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -62,7 +65,10 @@ public class PlayerController : MonoBehaviour
 
         ApplyMovement();
 
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        isGrounded = IsGrounded();
+        animator.SetBool("isGrounded", isGrounded);
+
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
