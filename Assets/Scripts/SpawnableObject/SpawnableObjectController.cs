@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class SpawnableObjectController : MonoBehaviour
 {
+    public float yOffset;
+
     private float moveSpeed = 10f;
 
     void Update()

@@ -68,6 +68,7 @@ public class Spawner : MonoBehaviour
                         {
                             GameObject instantiatedObstacle = Instantiate(randomObstacle, marker.position, Quaternion.identity);
                             instantiatedObstacle.GetComponent<SpawnableObjectController>()?.SetMoveSpeed(moveSpeed);
+                            instantiatedObstacle.transform.position = new Vector3(instantiatedObstacle.transform.position.x, instantiatedObstacle.transform.position.y + instantiatedObstacle.GetComponent<SpawnableObjectController>().yOffset, instantiatedObstacle.transform.position.z);
                         }
                     }
                 }
@@ -94,6 +95,7 @@ public class Spawner : MonoBehaviour
                         {
                             GameObject instantiatedPowerup = Instantiate(randomPowerup, marker.position, Quaternion.identity);
                             instantiatedPowerup.GetComponent<SpawnableObjectController>()?.SetMoveSpeed(moveSpeed);
+                            instantiatedPowerup.transform.position = new Vector3(instantiatedPowerup.transform.position.x, instantiatedPowerup.transform.position.y + instantiatedPowerup.GetComponent<SpawnableObjectController>().yOffset, instantiatedPowerup.transform.position.z);
                         }
                     }
                 }
@@ -120,6 +122,7 @@ public class Spawner : MonoBehaviour
                         {
                             GameObject instantiatedCollectable = Instantiate(randomCollectable, marker.position, Quaternion.identity);
                             instantiatedCollectable.GetComponent<SpawnableObjectController>()?.SetMoveSpeed(moveSpeed);
+                            instantiatedCollectable.transform.position = new Vector3(instantiatedCollectable.transform.position.x, instantiatedCollectable.transform.position.y + instantiatedCollectable.GetComponent<SpawnableObjectController>().yOffset, instantiatedCollectable.transform.position.z);
                         }
                     }
                 }

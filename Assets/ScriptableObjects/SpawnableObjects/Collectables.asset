@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Collectables
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 7184296224695362353, guid: 5def104606258439b9b56be20ba316b1, type: 3}
+  - {fileID: 6511053049739512419, guid: e4e012c3ac8752e4e8d136ec36ba1d35, type: 3}
