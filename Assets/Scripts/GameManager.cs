@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
             Spawner.instance.StopSpawining();
         }
 
+        if (FloorMovement.instance)
+        {
+            FloorMovement.instance.StopMovement();
+        }
+
         Debug.Log($"Final Score: {GetScore()}");
     }
 
