@@ -6,6 +6,11 @@ public class ObstacleController : SpawnableObjectController
 {
     public override void OnCollision()
     {
+        if (AudioManager.instance)
+        {
+            AudioManager.instance.PlayObstacleTriggerAudioClip();
+        }
+
         if (GameManager.instance)
         {
             GameManager.instance.OnGameOver();

@@ -8,6 +8,11 @@ public class PowerUpController : SpawnableObjectController
 
     public override void OnCollision()
     {
+        if (AudioManager.instance)
+        {
+            AudioManager.instance.PlayPickupTriggerAudioClip();
+        }
+
         PlayerController.instance.ActivatePowerUp(powerUpType);
         Destroy(gameObject);
     }

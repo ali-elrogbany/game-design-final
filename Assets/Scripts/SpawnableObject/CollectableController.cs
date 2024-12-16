@@ -8,6 +8,11 @@ public class CollectableController : SpawnableObjectController
 
     public override void OnCollision()
     {
+        if (AudioManager.instance)
+        {
+            AudioManager.instance.PlayCollectableTriggerAudioClip();
+        }
+
         if (GameManager.instance)
         {
             GameManager.instance.IncrementScore(scoreBonus);
