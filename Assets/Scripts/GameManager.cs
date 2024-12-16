@@ -49,6 +49,17 @@ public class GameManager : MonoBehaviour
             FloorMovement.instance.StopMovement();
         }
 
+        if (PlayerController.instance)
+        {
+            PlayerController.instance.OnGameOver();
+        }
+
+        SpawnableObjectController[] spawnableObjects = FindObjectsOfType<SpawnableObjectController>();
+        foreach (var obj in spawnableObjects)
+        {
+            obj.DisableCanMove();
+        }
+
         Debug.Log($"Final Score: {GetScore()}");
     }
 

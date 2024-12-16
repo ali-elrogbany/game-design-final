@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Local Variables")]
     private bool isGrounded;
+    private bool canMove = true;
     private Transform currentPosition;
     private bool isInvisible;
     private List<PowerUpType> activePowerUps = new List<PowerUpType>();
@@ -52,12 +53,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && canMove)
         {
             if (currentPosition != leftMarker)
                 currentPosition = currentPosition == rightMarker ? middleMarker : leftMarker;
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && canMove)
         {
             if (currentPosition != rightMarker)
                 currentPosition = currentPosition == leftMarker ? middleMarker : rightMarker;
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = IsGrounded();
         animator.SetBool("isGrounded", isGrounded);
 
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space) && canMove)
         {
             Jump();
         }
@@ -86,6 +87,12 @@ public class PlayerController : MonoBehaviour
     {
         activePowerUps.Add(powerUpType);
         StartCoroutine(HandlePowerUp(powerUpType));
+    }
+
+    public void OnGameOver()
+    {
+        animator.SetBool("gameOver", true);
+        canMove = false;
     }
 
     private IEnumerator HandlePowerUp(PowerUpType powerUpType)
