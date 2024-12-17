@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    [Header("UI References")]
+    public GameObject gameOverScreen;  // Reference to the Game Over UI panel
+    public TMP_Text currentScoreText;      // Reference to the Text showing current score
+    public TMP_Text highScoreText;   
 
     [Header("Settings")]
     [SerializeField] private float scoreIncrementRate = 10f;
@@ -60,8 +66,40 @@ public class GameManager : MonoBehaviour
             obj.DisableCanMove();
         }
 
-        Debug.Log($"Final Score: {GetScore()}");
+        //Calulate score
+        int finalScore = GetScore();
+        int highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+        if (finalScore > highScore)
+        {
+            highScore = finalScore;
+            PlayerPrefs.SetInt("HighScore", highScore);
+            PlayerPrefs.Save();
+        }
+
+        // Display Game Over UI
+        gameOverScreen.SetActive(true);
+        currentScoreText.text = "Score: " + finalScore;
+        highScoreText.text = "High Score: " + highScore;
+
+        Debug.Log($"Final Score: {finalScore}, High Score: {highScore}");
+
+        // Debug.Log($"Final Score: {GetScore()}");
+
     }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f; // Resume time
+        UnityEngine.SceneManagement.SceneManager.LoadScene(
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 
     public int GetScore()
     {
