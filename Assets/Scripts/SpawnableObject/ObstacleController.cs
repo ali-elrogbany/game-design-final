@@ -6,14 +6,17 @@ public class ObstacleController : SpawnableObjectController
 {
     public override void OnCollision()
     {
-        if (AudioManager.instance)
+        if (PlayerController.instance && !PlayerController.instance.GetIsInvisible())
         {
-            AudioManager.instance.PlayObstacleTriggerAudioClip();
-        }
+            if (AudioManager.instance)
+            {
+                AudioManager.instance.PlayObstacleTriggerAudioClip();
+            }
 
-        if (GameManager.instance)
-        {
-            GameManager.instance.OnGameOver();
+            if (GameManager.instance)
+            {
+                GameManager.instance.OnGameOver();
+            }
         }
     }
 }

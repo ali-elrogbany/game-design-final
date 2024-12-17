@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
         if (isGameActive)
         {
             score += scoreIncrementRate * scoreMultiplier * Time.deltaTime;
+
+            if (UIManager.instance)
+                UIManager.instance.UpdateScoreText(score);
         }
     }
 
@@ -73,6 +76,9 @@ public class GameManager : MonoBehaviour
         if (score < 0)
             return;
         this.score += score;
+
+        if (UIManager.instance)
+            UIManager.instance.UpdateScoreText(score);
     }
 
     public void ActivateDoubleScore()

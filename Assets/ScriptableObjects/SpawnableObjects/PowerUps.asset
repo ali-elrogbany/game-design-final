@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PowerUps
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 549962224027342985, guid: d5f79f58bb6134830b8131e6e0738604, type: 3}
-  - {fileID: 1682350958932657411, guid: 2e08f762b81d84884a386437ee143ff8, type: 3}
+  - {fileID: 8359966452239374491, guid: eaf313cb7a8a04298a265fc77eb20a66, type: 3}
+  - {fileID: 7865068745693838486, guid: 0a343f3e4f433402e8588ad790eeb54a, type: 3}

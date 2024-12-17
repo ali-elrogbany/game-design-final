@@ -83,6 +83,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public bool GetIsInvisible()
+    {
+        return isInvisible;
+    }
+
     public void ActivatePowerUp(PowerUpType powerUpType)
     {
         activePowerUps.Add(powerUpType);
@@ -114,9 +119,17 @@ public class PlayerController : MonoBehaviour
                 {
                     GameManager.instance.ActivateDoubleScore();
                 }
+                if (UIManager.instance)
+                {
+                    UIManager.instance.SetDoubleScorePowerupIcon(true);
+                }
                 break;
             case PowerUpType.INVISIBLE:
                 isInvisible = true;
+                if (UIManager.instance)
+                {
+                    UIManager.instance.SetInvisiblePowerupIcon(true);
+                }
                 break;
         }
     }
@@ -126,9 +139,17 @@ public class PlayerController : MonoBehaviour
         switch (powerUpType)
         {
             case PowerUpType.DOUBLE_SCORE:
+                if (UIManager.instance)
+                {
+                    UIManager.instance.SetDoubleScorePowerupIcon(false);
+                }
                 break;
             case PowerUpType.INVISIBLE:
                 isInvisible = false;
+                if (UIManager.instance)
+                {
+                    UIManager.instance.SetInvisiblePowerupIcon(false);
+                }
                 break;
         }
     }
