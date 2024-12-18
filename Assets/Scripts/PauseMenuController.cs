@@ -32,13 +32,16 @@ public class PauseMenuController : MonoBehaviour
 
     public void TogglePause()
     {
-        if (isPaused)
+        if (GameManager.instance && GameManager.instance.GetIsGameActive())
         {
-            ResumeGame();
-        }
-        else
-        {
-            PauseGame();
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
         }
     }
 

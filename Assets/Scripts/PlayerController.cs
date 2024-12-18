@@ -90,7 +90,14 @@ public class PlayerController : MonoBehaviour
 
     public void ActivatePowerUp(PowerUpType powerUpType)
     {
-        activePowerUps.Add(powerUpType);
+        if (activePowerUps.Contains(powerUpType))
+        {
+            StopCoroutine(HandlePowerUp(powerUpType));
+        }
+        else
+        {
+            activePowerUps.Add(powerUpType);
+        }
         StartCoroutine(HandlePowerUp(powerUpType));
     }
 
@@ -178,7 +185,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         SpawnableObjectController spawnableObjectController = other.GetComponent<SpawnableObjectController>();
-        if (spawnableObjectController && !isInvisible)
+        if (spawnableObjectController)
         {
             spawnableObjectController.OnCollision();
         }

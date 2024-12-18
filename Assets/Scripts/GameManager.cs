@@ -42,6 +42,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool GetIsGameActive()
+    {
+        return isGameActive;
+    }
+
     public void OnGameOver()
     {
         Debug.Log("Game Over");
