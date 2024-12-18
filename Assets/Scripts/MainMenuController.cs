@@ -7,6 +7,7 @@ public class MainMenuController : MonoBehaviour
     // Reference to the instruction page (UI Panel)
     public GameObject instructionPage;
 
+    public GameObject titleObject;
     public GameObject StartButton;
     public GameObject InstructButton;
     public GameObject QuitButton;
@@ -30,6 +31,7 @@ public class MainMenuController : MonoBehaviour
         instructionPage.SetActive(true);
 
         // Hide other buttons
+        titleObject.SetActive(false);
         StartButton.SetActive(false);
         InstructButton.SetActive(false);
         QuitButton.SetActive(false);
@@ -45,6 +47,7 @@ public class MainMenuController : MonoBehaviour
         instructionPage.SetActive(false);
 
         // Show other buttons
+        titleObject.SetActive(true);
         StartButton.SetActive(true);
         InstructButton.SetActive(true);
         QuitButton.SetActive(true);
