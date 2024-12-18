@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip collectableTriggerAudioClip;
     [SerializeField] private AudioClip pickupTriggerAudioClip;
 
+    [Header("Sliders")]
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+
     private void Awake()
     {
         if (instance != null)
@@ -22,6 +27,12 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
         instance = this;
+    }
+
+    private void Start()
+    {
+        musicSlider.value = musicAudioSource.volume;
+        sfxSlider.value = sfxAudioSource.volume;
     }
 
     public void PlayObstacleTriggerAudioClip()
@@ -37,5 +48,15 @@ public class AudioManager : MonoBehaviour
     public void PlayPickupTriggerAudioClip()
     {
         sfxAudioSource.PlayOneShot(pickupTriggerAudioClip);
+    }
+
+    public void SetMusicVolume()
+    {
+        musicAudioSource.volume = musicSlider.value;
+    }
+
+    public void SetSFXVolume()
+    {
+        sfxAudioSource.volume = sfxSlider.value;
     }
 }
